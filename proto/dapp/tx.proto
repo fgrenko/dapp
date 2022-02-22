@@ -7,7 +7,19 @@ option go_package = "github.com/fgrenko/dapp/x/dapp/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc CreateTask(MsgCreateTask) returns (MsgCreateTaskResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgCreateTask {
+  string creator = 1;
+  string taskType = 2;
+  string input = 3;
+  string config = 4;
+}
+
+message MsgCreateTaskResponse {
+  uint64 id = 1;
 }
 
 // this line is used by starport scaffolding # proto/tx/message
