@@ -1,0 +1,13 @@
+syntax = "proto3";
+package fgrenko.dapp.dapp;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/fgrenko/dapp/x/dapp/types";
+
+// Msg defines the Msg service.
+service Msg {
+    // this line is used by starport scaffolding # proto/tx/rpc
+}
+
+// this line is used by starport scaffolding # proto/tx/message
