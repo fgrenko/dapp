@@ -150,5 +150,19 @@ export class Api extends HttpClient {
             format: "json",
             ...params,
         });
+        /**
+         * No description
+         *
+         * @tags Query
+         * @name QueryTasks
+         * @summary Queries a list of Tasks items.
+         * @request GET:/fgrenko/dapp/dapp/tasks
+         */
+        this.queryTasks = (params = {}) => this.request({
+            path: `/fgrenko/dapp/dapp/tasks`,
+            method: "GET",
+            format: "json",
+            ...params,
+        });
     }
 }

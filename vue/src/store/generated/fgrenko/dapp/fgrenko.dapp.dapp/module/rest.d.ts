@@ -13,6 +13,11 @@ export interface DappQueryParamsResponse {
     /** params holds all the parameters of this module. */
     params?: DappParams;
 }
+export interface DappQueryTasksResponse {
+    taskType?: string;
+    input?: string;
+    config?: string;
+}
 export interface ProtobufAny {
     "@type"?: string;
 }
@@ -89,5 +94,14 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request GET:/fgrenko/dapp/dapp/params
      */
     queryParams: (params?: RequestParams) => Promise<HttpResponse<DappQueryParamsResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryTasks
+     * @summary Queries a list of Tasks items.
+     * @request GET:/fgrenko/dapp/dapp/tasks
+     */
+    queryTasks: (params?: RequestParams) => Promise<HttpResponse<DappQueryTasksResponse, RpcStatus>>;
 }
 export {};

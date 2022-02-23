@@ -38,6 +38,7 @@ function getStructure(template) {
 const getDefaultState = () => {
     return {
         Params: {},
+        Tasks: {},
         _Structure: {
             Params: getStructure(Params.fromPartial({})),
             Task: getStructure(Task.fromPartial({})),
@@ -71,6 +72,12 @@ export default {
                 params.query = null;
             }
             return state.Params[JSON.stringify(params)] ?? {};
+        },
+        getTasks: (state) => (params = { params: {} }) => {
+            if (!params.query) {
+                params.query = null;
+            }
+            return state.Tasks[JSON.stringify(params)] ?? {};
         },
         getTypeStructure: (state) => (type) => {
             return state._Structure[type].fields;
@@ -117,6 +124,20 @@ export default {
             }
             catch (e) {
                 throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.message);
+            }
+        },
+        async QueryTasks({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
+            try {
+                const key = params ?? {};
+                const queryClient = await initQueryClient(rootGetters);
+                let value = (await queryClient.queryTasks()).data;
+                commit('QUERY', { query: 'Tasks', key: { params: { ...key }, query }, value });
+                if (subscribe)
+                    commit('SUBSCRIBE', { action: 'QueryTasks', payload: { options: { all }, params: { ...key }, query } });
+                return getters['getTasks']({ params: { ...key }, query }) ?? {};
+            }
+            catch (e) {
+                throw new SpVuexError('QueryClient:QueryTasks', 'API Node Unavailable. Could not perform query: ' + e.message);
             }
         },
         async sendMsgCreateTask({ rootGetters }, { value, fee = [], memo = '' }) {

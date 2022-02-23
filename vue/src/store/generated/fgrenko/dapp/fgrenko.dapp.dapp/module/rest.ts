@@ -27,6 +27,12 @@ export interface DappQueryParamsResponse {
   params?: DappParams;
 }
 
+export interface DappQueryTasksResponse {
+  taskType?: string;
+  input?: string;
+  config?: string;
+}
+
 export interface ProtobufAny {
   "@type"?: string;
 }
@@ -245,6 +251,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<DappQueryParamsResponse, RpcStatus>({
       path: `/fgrenko/dapp/dapp/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryTasks
+   * @summary Queries a list of Tasks items.
+   * @request GET:/fgrenko/dapp/dapp/tasks
+   */
+  queryTasks = (params: RequestParams = {}) =>
+    this.request<DappQueryTasksResponse, RpcStatus>({
+      path: `/fgrenko/dapp/dapp/tasks`,
       method: "GET",
       format: "json",
       ...params,

@@ -23,8 +23,7 @@ func KeyPrefix(p string) []byte {
 
 const (
 	//...
-	  // Keep track of the index of posts  
+	// Keep track of the index of posts
 	TaskKey      = "Task-value-"
 	TaskCountKey = "Task-count-"
-  )
-  
+)

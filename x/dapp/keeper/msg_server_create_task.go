@@ -12,13 +12,13 @@ func (k msgServer) CreateTask(goCtx context.Context, msg *types.MsgCreateTask) (
 
 	// TODO: Handling the message
 	var task = types.Task{
-		Creator: msg.Creator,
+		Creator:  msg.Creator,
 		TaskType: msg.TaskType,
-		Input: msg.Input,
-		Config: msg.Config,
+		Input:    msg.Input,
+		Config:   msg.Config,
 	}
 
-	id := k.AppendTask(ctx,task)
+	id := k.AppendTask(ctx, task)
 
 	return &types.MsgCreateTaskResponse{Id: id}, nil
 }
